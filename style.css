@@ -1,0 +1,33 @@
+.body{
+    height: 100%;
+    padding: 0px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+}
+div img{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    max-width: 100%;
+    background-size: cover;
+    object-fit: cover;
+}
+
+
+.box{
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: rgba(0, 0, 0, 0.772); 
+    color: white;
+    padding: 40px; 
+    border-radius: 5px; 
+    text-align: center;
+}
+
+#weatherInfo p{
+    font-size: 18px;
+}
