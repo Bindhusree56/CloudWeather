@@ -35,7 +35,8 @@ Users can search for any city to get the current weather information. And the ba
 
 ## 📸 Screenshots
 
-![App Screenshot](screenshot.png)
+![App Screenshot](![image](https://github.com/user-attachments/assets/27d75a31-4848-4587-997f-61c72d5105e3)
+)
 
 ---
 
