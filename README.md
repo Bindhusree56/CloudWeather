@@ -11,7 +11,7 @@ Users can search for any city to get the current weather information. And the ba
 
 ## 🔗 Live Demo
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://your-deployed-link.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://bindhusree56.github.io/CloudWeather/)
 
 ---
 
