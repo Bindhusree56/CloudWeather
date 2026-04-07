@@ -1,27 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>CloudWeather - Modern Weather App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="weather">
-        <img id="image" alt="Search Result Image" src="london.webp">
-   
-    <div class="box">
-    <input type="text" id="cityInput" placeholder="Enter a city">
-    <button id="searchButton">Search</button>
-    <div id="weatherInfo">
-        <h1 id="cityName">London</h1>
-        <p id="temperature">Temperature: 12.43°C</p>
-        <p id="description">Weather: overcast clouds</p>
-        <p id="humidity">Humidity: 80%</p>
-        <p id="windSpeed">Wind Speed: 5.66 m/s</p>
-    </div>
-    </div>
-    </div>
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="#hero" class="logo">CloudWeather</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#today">Today's Weather</a></li>
+                <li><a href="#forecast">5-Day Forecast</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <section id="hero" class="parallax-section">
+        <div class="hero-overlay"></div>
+        <img id="heroImage" class="hero-bg" alt="City Background" src="london.webp">
+        <div class="hero-content">
+            <h1>Discover Weather Worldwide</h1>
+            <p>Beautiful images from every corner of the globe</p>
+        </div>
+    </section>
+
+    <section id="today" class="content-section">
+        <div class="container">
+            <h2 class="section-title">Today's Weather</h2>
+            <div class="weather-box">
+                <div class="search-bar">
+                    <input type="text" id="cityInput" placeholder="Search for a city...">
+                    <button id="searchButton">Search</button>
+                    <button id="geoButton" class="geo-btn" aria-label="Use current location">📍</button>
+                </div>
+                <div id="loadingSpinner" class="spinner"></div>
+                <div id="weatherInfo">
+                    <div class="weather-main">
+                        <h1 id="cityName">London</h1>
+                        <div class="weather-icon" id="weatherIcon">☁️</div>
+                        <p class="temperature"><span id="temperature">12</span>°C</p>
+                    </div>
+                    <p id="description" class="description">overcast clouds</p>
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Humidity</span>
+                            <span id="humidity">80%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Wind</span>
+                            <span id="windSpeed">5.66 m/s</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Feels Like</span>
+                            <span id="feelsLike">11°C</span>
+                        </div>
+                    </div>
+                    <div class="wind-compass">
+                        <div class="compass">
+                            <div class="compass-needle" id="windDirection"></div>
+                            <span class="compass-label">N</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="forecast" class="parallax-section parallax-layer-1">
+        <div class="container">
+            <h2 class="section-title">5-Day Forecast</h2>
+            <div class="forecast-grid" id="forecastGrid">
+                <div class="forecast-card">
+                    <p class="forecast-day">Mon</p>
+                    <div class="forecast-icon">☁️</div>
+                    <p class="forecast-temp">15°C</p>
+                </div>
+                <div class="forecast-card">
+                    <p class="forecast-day">Tue</p>
+                    <div class="forecast-icon">☀️</div>
+                    <p class="forecast-temp">18°C</p>
+                </div>
+                <div class="forecast-card">
+                    <p class="forecast-day">Wed</p>
+                    <div class="forecast-icon">⛅</div>
+                    <p class="forecast-temp">16°C</p>
+                </div>
+                <div class="forecast-card">
+                    <p class="forecast-day">Thu</p>
+                    <div class="forecast-icon">🌧️</div>
+                    <p class="forecast-temp">12°C</p>
+                </div>
+                <div class="forecast-card">
+                    <p class="forecast-day">Fri</p>
+                    <div class="forecast-icon">☀️</div>
+                    <p class="forecast-temp">20°C</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="content-section">
+        <div class="container">
+            <h2 class="section-title">About CloudWeather</h2>
+            <div class="about-content">
+                <p>CloudWeather brings you real-time weather data with stunning photography from cities around the world. 
+                Get accurate forecasts, wind information, and beautiful imagery all in one place.</p>
+                <p>Built with OpenWeatherMap API and Unsplash for imagery.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CloudWeather. All rights reserved.</p>
+            <p class="photo-credit" id="photoCredit">Photo by Unsplash</p>
+        </div>
+    </footer>
+
     <script src="app.js"></script>
 </body>
 </html>
