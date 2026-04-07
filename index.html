@@ -3,127 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudWeather - Modern Weather App</title>
+    <title>CloudWeather — Discover Weather Worldwide</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Grain Overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-content">
-            <a href="#hero" class="logo">CloudWeather</a>
+            <a href="#hero" class="logo">
+                <span class="logo-icon">⛅</span>
+                <span class="logo-text">CloudWeather</span>
+            </a>
             <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#today">Today's Weather</a></li>
-                <li><a href="#forecast">5-Day Forecast</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#today" class="nav-link">Today</a></li>
+                <li><a href="#forecast" class="nav-link">Forecast</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
             </ul>
-            <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
-                <span class="theme-icon">🌙</span>
-            </button>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#hero" class="mobile-link">Home</a>
+            <a href="#today" class="mobile-link">Today</a>
+            <a href="#forecast" class="mobile-link">Forecast</a>
+            <a href="#about" class="mobile-link">About</a>
         </div>
     </nav>
 
-    <section id="hero" class="parallax-section">
-        <div class="hero-overlay"></div>
-        <img id="heroImage" class="hero-bg" alt="City Background" src="london.webp">
-        <div class="hero-content">
-            <h1>Discover Weather Worldwide</h1>
-            <p>Beautiful images from every corner of the globe</p>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-parallax" id="heroBg">
+            <img id="heroImage" class="hero-bg" alt="City Background" src="london.webp">
+            <div class="hero-overlay"></div>
         </div>
+
+        <!-- Floating particles -->
+        <div class="particles" id="particles"></div>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow reveal-up">Real-time Weather Intelligence</p>
+            <h1 class="hero-title reveal-up delay-1">
+                Discover <em>Weather</em><br>Worldwide
+            </h1>
+            <p class="hero-subtitle reveal-up delay-2">
+                Stunning city imagery. Live forecasts. Wind, humidity, and beyond.
+            </p>
+            <div class="hero-cta reveal-up delay-3">
+                <a href="#today" class="btn-primary">Check the Weather</a>
+                <a href="#forecast" class="btn-ghost">5-Day Forecast ↓</a>
+            </div>
+        </div>
+
+        <!-- Scroll Hint -->
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+
+        <!-- Photo credit -->
+        <div class="hero-photo-credit" id="heroPhotoCredit">Photo by Unsplash</div>
     </section>
 
+    <!-- Live Stats Bar -->
+    <div class="stats-bar" id="statsBar">
+        <div class="stats-inner">
+            <div class="stat-item" id="statCity"><span class="stat-label">City</span><span class="stat-val" id="statCityVal">—</span></div>
+            <div class="stat-divider"></div>
+            <div class="stat-item"><span class="stat-label">Temperature</span><span class="stat-val" id="statTemp">—</span></div>
+            <div class="stat-divider"></div>
+            <div class="stat-item"><span class="stat-label">Condition</span><span class="stat-val" id="statCondition">—</span></div>
+            <div class="stat-divider"></div>
+            <div class="stat-item"><span class="stat-label">Humidity</span><span class="stat-val" id="statHumidity">—</span></div>
+        </div>
+    </div>
+
+    <!-- Today's Weather -->
     <section id="today" class="content-section">
         <div class="container">
-            <h2 class="section-title">Today's Weather</h2>
-            <div class="weather-box">
+            <div class="section-header reveal-up">
+                <span class="section-tag">Live Data</span>
+                <h2 class="section-title">Today's Weather</h2>
+                <p class="section-desc">Search any city in the world for real-time conditions</p>
+            </div>
+
+            <div class="weather-box reveal-scale">
+                <!-- Search Bar -->
                 <div class="search-bar">
-                    <input type="text" id="cityInput" placeholder="Search for a city...">
-                    <button id="searchButton">Search</button>
-                    <button id="geoButton" class="geo-btn" aria-label="Use current location">📍</button>
+                    <div class="search-input-wrap">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="cityInput" placeholder="Search for a city..." autocomplete="off">
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </div>
+                    <button id="searchButton" class="btn-search">
+                        <span>Search</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </button>
+                    <button id="geoButton" class="geo-btn" aria-label="Use current location" title="Use my location">📍</button>
                 </div>
-                <div id="loadingSpinner" class="spinner"></div>
-                <div id="weatherInfo">
-                    <div class="weather-main">
-                        <h1 id="cityName">London</h1>
-                        <div class="weather-icon" id="weatherIcon">☁️</div>
-                        <p class="temperature"><span id="temperature">12</span>°C</p>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="spinner-wrap">
+                    <div class="spinner-ring"></div>
+                    <p class="spinner-text">Fetching weather...</p>
+                </div>
+
+                <!-- Weather Info -->
+                <div id="weatherInfo" class="weather-info">
+                    <div class="weather-hero-row">
+                        <div class="weather-left">
+                            <h3 id="cityName" class="city-name">London</h3>
+                            <p id="description" class="weather-desc">overcast clouds</p>
+                            <div class="temp-display">
+                                <span id="temperature" class="temp-number">12</span>
+                                <span class="temp-unit">°C</span>
+                            </div>
+                        </div>
+                        <div class="weather-right">
+                            <div class="weather-icon-wrap">
+                                <div class="weather-icon" id="weatherIcon">☁️</div>
+                                <div class="icon-glow"></div>
+                            </div>
+                        </div>
                     </div>
-                    <p id="description" class="description">overcast clouds</p>
+
+                    <!-- Details Grid -->
                     <div class="weather-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Humidity</span>
-                            <span id="humidity">80%</span>
+                        <div class="detail-card">
+                            <div class="detail-icon">💧</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Humidity</span>
+                                <span class="detail-val" id="humidity">80%</span>
+                            </div>
+                            <div class="detail-bar"><div class="detail-fill" id="humidityBar" style="width:80%"></div></div>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Wind</span>
-                            <span id="windSpeed">5.66 m/s</span>
+                        <div class="detail-card">
+                            <div class="detail-icon">💨</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Wind Speed</span>
+                                <span class="detail-val" id="windSpeed">5.66 m/s</span>
+                            </div>
+                            <div class="wind-compass-mini">
+                                <div class="compass-ring">
+                                    <div class="compass-needle" id="windDirection"></div>
+                                    <span class="compass-n">N</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Feels Like</span>
-                            <span id="feelsLike">11°C</span>
+                        <div class="detail-card">
+                            <div class="detail-icon">🌡️</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Feels Like</span>
+                                <span class="detail-val" id="feelsLike">11°C</span>
+                            </div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-icon">👁️</div>
+                            <div class="detail-info">
+                                <span class="detail-label">Visibility</span>
+                                <span class="detail-val" id="visibility">10 km</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="wind-compass">
-                        <div class="compass">
-                            <div class="compass-needle" id="windDirection"></div>
-                            <span class="compass-label">N</span>
-                        </div>
-                    </div>
+
+                    <!-- Image Cycle Indicator -->
+                    <div class="image-dots" id="imageDots"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="forecast" class="parallax-section parallax-layer-1">
+    <!-- Forecast Section with Parallax BG -->
+    <section id="forecast" class="forecast-section parallax-bg">
+        <div class="parallax-layer" id="forecastParallax"></div>
+        <div class="section-overlay"></div>
         <div class="container">
-            <h2 class="section-title">5-Day Forecast</h2>
+            <div class="section-header reveal-up">
+                <span class="section-tag">Upcoming</span>
+                <h2 class="section-title">5-Day Forecast</h2>
+                <p class="section-desc">Plan ahead with extended forecasts</p>
+            </div>
             <div class="forecast-grid" id="forecastGrid">
                 <div class="forecast-card">
                     <p class="forecast-day">Mon</p>
-                    <div class="forecast-icon">☁️</div>
-                    <p class="forecast-temp">15°C</p>
+                    <div class="forecast-icon-wrap"><div class="forecast-icon">☁️</div></div>
+                    <div class="forecast-temps">
+                        <p class="forecast-temp-high">15°</p>
+                        <p class="forecast-temp-low">9°</p>
+                    </div>
+                    <div class="forecast-bar"><div class="forecast-fill" style="width:60%"></div></div>
                 </div>
                 <div class="forecast-card">
                     <p class="forecast-day">Tue</p>
-                    <div class="forecast-icon">☀️</div>
-                    <p class="forecast-temp">18°C</p>
+                    <div class="forecast-icon-wrap"><div class="forecast-icon">☀️</div></div>
+                    <div class="forecast-temps">
+                        <p class="forecast-temp-high">18°</p>
+                        <p class="forecast-temp-low">12°</p>
+                    </div>
+                    <div class="forecast-bar"><div class="forecast-fill" style="width:75%"></div></div>
                 </div>
                 <div class="forecast-card">
                     <p class="forecast-day">Wed</p>
-                    <div class="forecast-icon">⛅</div>
-                    <p class="forecast-temp">16°C</p>
+                    <div class="forecast-icon-wrap"><div class="forecast-icon">⛅</div></div>
+                    <div class="forecast-temps">
+                        <p class="forecast-temp-high">16°</p>
+                        <p class="forecast-temp-low">10°</p>
+                    </div>
+                    <div class="forecast-bar"><div class="forecast-fill" style="width:65%"></div></div>
                 </div>
                 <div class="forecast-card">
                     <p class="forecast-day">Thu</p>
-                    <div class="forecast-icon">🌧️</div>
-                    <p class="forecast-temp">12°C</p>
+                    <div class="forecast-icon-wrap"><div class="forecast-icon">🌧️</div></div>
+                    <div class="forecast-temps">
+                        <p class="forecast-temp-high">12°</p>
+                        <p class="forecast-temp-low">7°</p>
+                    </div>
+                    <div class="forecast-bar"><div class="forecast-fill" style="width:45%"></div></div>
                 </div>
                 <div class="forecast-card">
                     <p class="forecast-day">Fri</p>
-                    <div class="forecast-icon">☀️</div>
-                    <p class="forecast-temp">20°C</p>
+                    <div class="forecast-icon-wrap"><div class="forecast-icon">☀️</div></div>
+                    <div class="forecast-temps">
+                        <p class="forecast-temp-high">20°</p>
+                        <p class="forecast-temp-low">13°</p>
+                    </div>
+                    <div class="forecast-bar"><div class="forecast-fill" style="width:85%"></div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="content-section">
+    <!-- About Section -->
+    <section id="about" class="content-section about-section">
         <div class="container">
-            <h2 class="section-title">About CloudWeather</h2>
-            <div class="about-content">
-                <p>CloudWeather brings you real-time weather data with stunning photography from cities around the world. 
-                Get accurate forecasts, wind information, and beautiful imagery all in one place.</p>
-                <p>Built with OpenWeatherMap API and Unsplash for imagery.</p>
+            <div class="about-grid">
+                <div class="about-text reveal-up">
+                    <span class="section-tag">About</span>
+                    <h2 class="section-title left-align">Built for<br><em>Weather Lovers</em></h2>
+                    <p>CloudWeather brings you live weather data paired with stunning photography from cities around the world. Search any city — from Tokyo to Tenerife — and get the full picture.</p>
+                    <p>Powered by OpenWeatherMap for precise data and Unsplash for breathtaking imagery.</p>
+                    <div class="about-badges">
+                        <span class="badge">🌍 200+ Countries</span>
+                        <span class="badge">⚡ Real-time Data</span>
+                        <span class="badge">🖼️ Live Photography</span>
+                    </div>
+                </div>
+                <div class="about-visual reveal-up delay-2">
+                    <div class="about-card-stack">
+                        <div class="stack-card stack-card-3">
+                            <span>🌩️</span><p>Storm tracking</p>
+                        </div>
+                        <div class="stack-card stack-card-2">
+                            <span>🌡️</span><p>Temperature trends</p>
+                        </div>
+                        <div class="stack-card stack-card-1">
+                            <span>🌍</span><p>Global coverage</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 CloudWeather. All rights reserved.</p>
-            <p class="photo-credit" id="photoCredit">Photo by Unsplash</p>
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <span class="logo-icon">⛅</span>
+                    <span>CloudWeather</span>
+                </div>
+                <p class="footer-copy">&copy; 2026 CloudWeather. All rights reserved.</p>
+                <p class="photo-credit" id="photoCredit">Photography via Unsplash</p>
+            </div>
         </div>
     </footer>
 
